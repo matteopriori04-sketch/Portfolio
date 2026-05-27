@@ -1,0 +1,21 @@
+{
+  "name": "matteo-priori-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Personal portfolio of Matteo Priori — Computer Engineering student @ Sapienza University of Rome.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.5.0",
+    "@astrojs/sitemap": "^3.3.0",
+    "tailwindcss": "^4.1.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "@fontsource-variable/inter": "^5.2.0",
+    "@fontsource-variable/space-grotesk": "^5.2.0",
+    "@fontsource-variable/jetbrains-mono": "^5.2.0"
+  }
+}

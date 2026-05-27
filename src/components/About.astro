@@ -1,0 +1,38 @@
+---
+/**
+ * About — short narrative: third year, master's decision (Cybersecurity vs AI),
+ * problem-solver mindset.
+ */
+import { about } from '../i18n/content';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const a = about[lang];
+---
+
+<section id="about" class="border-t border-border py-24">
+  <div class="container-page">
+    <p class="eyebrow mb-3" data-reveal>{a.eyebrow}</p>
+
+    <h2
+      class="max-w-3xl text-3xl font-bold sm:text-4xl"
+      data-reveal
+      data-reveal-delay="80"
+    >
+      {a.title}
+    </h2>
+
+    <div class="mt-8 max-w-3xl space-y-5 text-base leading-relaxed text-fg-soft sm:text-lg">
+      {
+        a.paragraphs.map((paragraph, i) => (
+          <p data-reveal data-reveal-delay={160 + i * 80}>
+            {paragraph}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+</section>

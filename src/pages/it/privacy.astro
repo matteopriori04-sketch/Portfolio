@@ -1,0 +1,18 @@
+---
+/**
+ * Italian Privacy Policy — served at `/it/privacy`.
+ * REVIEW the content in Legal.astro before publishing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Legal from '../../components/Legal.astro';
+
+const lang = 'it' as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Informativa sulla privacy — Matteo Priori"
+  description="Informativa sulla privacy di matteopriori.it: portfolio statico senza cookie, analytics o tracciatori di terze parti."
+>
+  <Legal lang={lang} />
+</BaseLayout>

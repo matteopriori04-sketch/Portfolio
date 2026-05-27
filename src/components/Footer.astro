@@ -1,0 +1,32 @@
+---
+/**
+ * Footer — credit line and copyright.
+ */
+import { useTranslations, homePath } from '../i18n/utils';
+import { SITE } from '../consts';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+
+// Privacy page lives next to the home path (`/privacy`, `/it/privacy`).
+const privacyHref = lang === 'en' ? '/privacy' : '/it/privacy';
+---
+
+<footer class="border-t border-border py-10">
+  <div class="container-page flex flex-col items-center justify-between gap-4 text-center text-sm text-fg-soft sm:flex-row sm:text-left">
+    <p>&copy; {year} {SITE.author}. {t('footer.rights')}</p>
+
+    <nav class="flex items-center gap-4" aria-label="Footer">
+      <a href={privacyHref} class="transition-colors hover:text-accent">{t('footer.privacy')}</a>
+      <span class="text-border" aria-hidden="true">·</span>
+      <a href={homePath(lang)} class="transition-colors hover:text-accent">{SITE.author}</a>
+    </nav>
+
+    <p class="font-mono text-xs">{t('footer.built')}</p>
+  </div>
+</footer>

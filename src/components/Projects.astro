@@ -1,0 +1,36 @@
+---
+/**
+ * Projects — the centrepiece section. Lays out the project cards in a
+ * responsive grid (1 column on mobile, 2 from md up).
+ */
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+import { sections } from '../i18n/content';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = sections[lang];
+---
+
+<section id="projects" class="border-t border-border py-24">
+  <div class="container-page">
+    <p class="eyebrow mb-3" data-reveal>{s.projectsEyebrow}</p>
+    <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="80">
+      {s.projectsTitle}
+    </h2>
+    <p
+      class="mt-4 max-w-2xl text-base leading-relaxed text-fg-soft sm:text-lg"
+      data-reveal
+      data-reveal-delay="160"
+    >
+      {s.projectsIntro}
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+      {projects.map((project, i) => <ProjectCard project={project} lang={lang} delay={i * 100} />)}
+    </div>
+  </div>
+</section>

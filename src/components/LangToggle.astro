@@ -1,0 +1,27 @@
+---
+/**
+ * LangToggle — a plain link between the two locale roots (`/` ↔ `/it`).
+ * No JavaScript: each language is a separate pre-rendered page.
+ */
+import { useTranslations, otherLang, homePath } from '../i18n/utils';
+import { languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const target = otherLang(lang);
+const targetHref = homePath(target);
+---
+
+<a
+  href={targetHref}
+  class="inline-flex h-9 items-center justify-center rounded-md border border-border px-2.5 font-mono text-xs font-medium text-fg-soft transition-colors hover:border-accent hover:text-accent"
+  aria-label={t('a11y.lang_toggle')}
+  hreflang={target}
+>
+  {/* Show the language you'd switch to. */}
+  {languages[target]}
+</a>

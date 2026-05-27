@@ -1,0 +1,46 @@
+---
+/**
+ * Skills — technologies grouped by category, rendered as monospace badges.
+ */
+import { skillGroups } from '../data/skills';
+import { sections } from '../i18n/content';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = sections[lang];
+---
+
+<section id="skills" class="border-t border-border py-24">
+  <div class="container-page">
+    <p class="eyebrow mb-3" data-reveal>{s.skillsEyebrow}</p>
+    <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="80">
+      {s.skillsTitle}
+    </h2>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {
+        skillGroups.map((group, i) => (
+          <div
+            class="rounded-2xl border border-border bg-surface p-6"
+            data-reveal
+            data-reveal-delay={160 + i * 80}
+          >
+            <h3 class="font-mono text-sm uppercase tracking-wider text-accent">
+              {group.category[lang]}
+            </h3>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li class="rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-sm text-fg">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+---
+/**
+ * Header — sticky top bar with the brand monogram, section navigation,
+ * theme toggle and language toggle. On small screens the nav collapses into a
+ * toggleable menu; on >=md it sits inline.
+ */
+import ThemeToggle from './ThemeToggle.astro';
+import LangToggle from './LangToggle.astro';
+import { useTranslations, homePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// In-page anchors are the same for both locales.
+const navItems = [
+  { href: '#about', label: t('nav.about') },
+  { href: '#projects', label: t('nav.projects') },
+  { href: '#skills', label: t('nav.skills') },
+  { href: '#contact', label: t('nav.contact') },
+];
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-border/80 bg-bg/80 backdrop-blur-md"
+>
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <!-- Brand / monogram -->
+    <a
+      href={homePath(lang)}
+      class="font-display text-lg font-bold tracking-tight text-fg transition-colors hover:text-accent"
+    >
+      MP<span class="text-accent">.</span>
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Primary">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-medium text-fg-soft transition-colors hover:text-accent"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Controls -->
+    <div class="flex items-center gap-2">
+      <LangToggle lang={lang} />
+      <ThemeToggle lang={lang} />
+
+      <!-- Mobile menu button -->
+      <button
+        type="button"
+        id="menu-toggle"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-fg-soft transition-colors hover:border-accent hover:text-accent md:hidden"
+        aria-label={t('a11y.menu')}
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile navigation (collapsed by default) -->
+  <nav
+    id="mobile-nav"
+    class="hidden border-t border-border md:hidden"
+    aria-label="Mobile"
+  >
+    <div class="container-page flex flex-col py-2">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-md px-2 py-3 text-base font-medium text-fg-soft transition-colors hover:bg-surface-2 hover:text-accent"
+            data-mobile-link
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Toggle the mobile menu and close it after a link is tapped.
+  const btn = document.getElementById('menu-toggle');
+  const nav = document.getElementById('mobile-nav');
+
+  const close = () => {
+    nav?.classList.add('hidden');
+    btn?.setAttribute('aria-expanded', 'false');
+  };
+
+  btn?.addEventListener('click', () => {
+    const isHidden = nav?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(!isHidden));
+  });
+
+  document
+    .querySelectorAll('[data-mobile-link]')
+    .forEach((link) => link.addEventListener('click', close));
+</script>

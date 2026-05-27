@@ -1,0 +1,65 @@
+---
+/**
+ * Hero — first thing visitors see: name, role, a one-line positioning
+ * statement and two CTAs (projects / contact).
+ */
+import HeroBackground from './HeroBackground.astro';
+import { useTranslations } from '../i18n/utils';
+import { hero } from '../i18n/content';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const h = hero[lang];
+---
+
+<section class="relative overflow-hidden">
+  <!-- Decorative backdrop: accent glow + subtle AI/cyber node network. -->
+  <HeroBackground />
+
+  <div class="container-page relative flex min-h-[88vh] flex-col justify-center py-24">
+    <p class="eyebrow mb-4" data-reveal>{h.greeting}</p>
+
+    <h1
+      class="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+      data-reveal
+      data-reveal-delay="80"
+    >
+      {h.name}
+    </h1>
+
+    <p
+      class="mt-5 max-w-2xl text-lg font-medium text-fg sm:text-xl"
+      data-reveal
+      data-reveal-delay="160"
+    >
+      {h.subtitle}
+    </p>
+
+    <p
+      class="mt-4 max-w-2xl text-base leading-relaxed text-fg-soft sm:text-lg"
+      data-reveal
+      data-reveal-delay="240"
+    >
+      {h.positioning}
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-4" data-reveal data-reveal-delay="320">
+      <a
+        href="#projects"
+        class="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-contrast transition-colors hover:bg-accent-hover"
+      >
+        {t('hero.cta_projects')}
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-fg transition-colors hover:border-accent hover:text-accent"
+      >
+        {t('hero.cta_contact')}
+      </a>
+    </div>
+  </div>
+</section>

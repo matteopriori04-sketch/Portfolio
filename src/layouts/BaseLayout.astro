@@ -1,0 +1,160 @@
+---
+/**
+ * BaseLayout — the document shell shared by every page.
+ *
+ * Responsibilities:
+ *  - <head>: charset, viewport, favicon, fonts, SEO + Open Graph / Twitter tags.
+ *  - An inline, render-blocking theme script that applies the saved theme
+ *    *before* first paint to avoid a flash of the wrong colours (FOUC).
+ *  - Self-hosted variable fonts via @fontsource (no external requests).
+ *  - Header / Footer chrome around a page <slot/>.
+ */
+
+// Self-hosted fonts — bundled at build time, served from our own domain.
+import '@fontsource-variable/inter';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
+
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import { SITE } from '../consts';
+import { meta } from '../i18n/content';
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Optional per-page overrides; default to the home meta for this locale. */
+  title?: string;
+  description?: string;
+}
+
+const { lang, title: titleProp, description: descProp } = Astro.props;
+const t = useTranslations(lang);
+const title = titleProp ?? meta[lang].title;
+const description = descProp ?? meta[lang].description;
+
+// Absolute URLs for canonical link and social cards.
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+const ogImage = new URL(SITE.ogImage, Astro.site ?? SITE.url).href;
+
+// Build correct hreflang alternates for the *current* page (works for
+// sub-pages like /privacy → /it/privacy, not just the home page).
+const enPath = Astro.url.pathname.replace(/^\/it(\/|$)/, '/');
+const itPath = enPath === '/' ? '/it' : `/it${enPath}`;
+const base = Astro.site ?? SITE.url;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon (vector first, with raster fallbacks set in /public). -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Primary meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Tell crawlers the two language variants of THIS page exist. -->
+    <link rel="alternate" hreflang="en" href={new URL(enPath, base).href} />
+    <link rel="alternate" hreflang="it" href={new URL(itPath, base).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(enPath, base).href} />
+
+    <!-- Open Graph (Facebook, LinkedIn, ...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={SITE.author} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#0b0f12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+
+    {/*
+      COOKIE / GDPR NOTE — no consent banner is required for this site.
+      We set NO cookies and run NO analytics or third-party trackers.
+      The only client-side storage is `localStorage["theme"]` below, which holds
+      the user's light/dark preference. Under the ePrivacy Directive and the
+      Italian Garante's cookie guidelines this is a "strictly necessary /
+      functional" technical storage that does NOT require prior consent.
+      If you ever add analytics or marketing cookies, you MUST add a blocking,
+      prior-consent cookie banner before they load. See the Privacy Policy page.
+    */}
+    {/* Apply the stored / preferred theme before first paint — prevents FOUC. */}
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- Keyboard / screen-reader skip link. -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-contrast"
+    >
+      {t('a11y.skip')}
+    </a>
+
+    <Header lang={lang} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+
+    <script>
+      // Progressive-enhancement scroll reveal: hide [data-reveal] elements,
+      // then fade them up as they enter the viewport. Optional stagger via
+      // `data-reveal-delay` (ms).
+      const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if (items.length && 'IntersectionObserver' in window) {
+        items.forEach((el) => {
+          el.classList.add('reveal-init');
+          const delay = el.dataset.revealDelay;
+          if (delay) el.style.transitionDelay = `${delay}ms`;
+        });
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-show');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+
+        items.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>

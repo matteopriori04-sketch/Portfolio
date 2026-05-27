@@ -1,0 +1,165 @@
+---
+/**
+ * Legal / Privacy Policy content, bilingual.
+ *
+ * This is an accurate, publishable baseline for a STATIC, no-tracking site:
+ *  - no cookies, no analytics, no third-party trackers;
+ *  - the only client storage is the functional `theme` value in localStorage;
+ *  - the host (Vercel) processes technical connection data (IP, logs) as a
+ *    processor to deliver and secure the site.
+ *
+ * REVIEW before publishing: confirm the data-controller details and, if you
+ * later add forms or analytics, update the relevant sections.
+ */
+import { CONTACTS, SITE } from '../consts';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+// Last meaningful update of this policy.
+const lastUpdated = lang === 'it' ? '27 maggio 2026' : 'May 27, 2026';
+
+const content = {
+  en: {
+    title: 'Privacy Policy',
+    updated: `Last updated: ${lastUpdated}`,
+    intro: `This Privacy Policy explains how personal data is handled when you visit ${SITE.url}. The site is a static personal portfolio: it sets no cookies and uses no analytics or advertising trackers.`,
+    sections: [
+      {
+        h: 'Data Controller',
+        p: [
+          `The data controller is ${SITE.author} (Rome, Italy). For any privacy request you can write to ${CONTACTS.email}.`,
+        ],
+      },
+      {
+        h: 'What data is processed',
+        p: [
+          'Browsing data: like any website, the hosting provider automatically processes technical data needed to deliver and secure the pages (e.g. IP address, request time, browser type, server logs). This processing is carried out by the provider as a data processor.',
+          'Contact data: if you choose to email me, I process your email address and the content of your message for the sole purpose of replying.',
+          'No cookies and no tracking: this site does not use profiling or analytics cookies. The only information stored in your browser is a "theme" value in localStorage that remembers your light/dark preference. It is strictly functional, stays on your device, and is never sent to a server — so no consent banner is required.',
+        ],
+      },
+      {
+        h: 'Legal bases',
+        p: [
+          'Delivering and securing the site relies on the legitimate interest in providing a working, safe website (Art. 6(1)(f) GDPR). Replying to your message relies on responding to your request / legitimate interest (Art. 6(1)(b)/(f) GDPR).',
+        ],
+      },
+      {
+        h: 'Hosting and data transfers',
+        p: [
+          'The site is hosted on Vercel (Vercel Inc.). As part of delivery, technical data may be processed on infrastructure that can be located outside the European Economic Area, under the safeguards offered by the provider (e.g. Standard Contractual Clauses). See Vercel’s privacy documentation for details.',
+        ],
+      },
+      {
+        h: 'Retention',
+        p: [
+          'Server/technical logs are kept by the hosting provider for the limited time needed for security and diagnostics. Emails you send are kept only as long as needed to handle your request.',
+        ],
+      },
+      {
+        h: 'Your rights',
+        p: [
+          'Under the GDPR you may request access, rectification, erasure, restriction, objection and portability of your personal data. To exercise these rights, write to ' +
+            CONTACTS.email +
+            '. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali, garanteprivacy.it).',
+        ],
+      },
+      {
+        h: 'Changes',
+        p: [
+          'This policy may be updated over time. The “last updated” date above reflects the latest version.',
+        ],
+      },
+    ],
+    back: '← Back to home',
+  },
+  it: {
+    title: 'Informativa sulla privacy',
+    updated: `Ultimo aggiornamento: ${lastUpdated}`,
+    intro: `Questa informativa spiega come vengono trattati i dati personali quando visiti ${SITE.url}. Il sito è un portfolio personale statico: non imposta cookie e non utilizza strumenti di analisi o tracciamento pubblicitario.`,
+    sections: [
+      {
+        h: 'Titolare del trattamento',
+        p: [
+          `Il titolare del trattamento è ${SITE.author} (Roma, Italia). Per qualsiasi richiesta in materia di privacy puoi scrivere a ${CONTACTS.email}.`,
+        ],
+      },
+      {
+        h: 'Quali dati vengono trattati',
+        p: [
+          'Dati di navigazione: come ogni sito web, il fornitore di hosting tratta automaticamente i dati tecnici necessari a erogare e proteggere le pagine (es. indirizzo IP, orario della richiesta, tipo di browser, log del server). Tale trattamento è svolto dal fornitore in qualità di responsabile del trattamento.',
+          'Dati di contatto: se decidi di scrivermi una mail, tratto il tuo indirizzo email e il contenuto del messaggio al solo scopo di risponderti.',
+          'Nessun cookie e nessun tracciamento: questo sito non usa cookie di profilazione o analitici. L’unica informazione salvata nel tuo browser è un valore "theme" in localStorage che ricorda la preferenza chiaro/scuro. È strettamente funzionale, resta sul tuo dispositivo e non viene mai inviato a un server — perciò non è richiesto alcun banner di consenso.',
+        ],
+      },
+      {
+        h: 'Basi giuridiche',
+        p: [
+          'L’erogazione e la sicurezza del sito si basano sul legittimo interesse a fornire un sito funzionante e sicuro (art. 6(1)(f) GDPR). La risposta ai tuoi messaggi si basa sul riscontro alla tua richiesta / legittimo interesse (art. 6(1)(b)/(f) GDPR).',
+        ],
+      },
+      {
+        h: 'Hosting e trasferimenti di dati',
+        p: [
+          'Il sito è ospitato su Vercel (Vercel Inc.). Nell’ambito dell’erogazione, i dati tecnici possono essere trattati su infrastrutture che possono trovarsi al di fuori dello Spazio Economico Europeo, con le garanzie offerte dal fornitore (es. Clausole Contrattuali Standard). Per i dettagli consulta la documentazione privacy di Vercel.',
+        ],
+      },
+      {
+        h: 'Conservazione',
+        p: [
+          'I log tecnici/del server sono conservati dal fornitore di hosting per il tempo limitato necessario a sicurezza e diagnostica. Le email che invii sono conservate solo per il tempo necessario a gestire la tua richiesta.',
+        ],
+      },
+      {
+        h: 'I tuoi diritti',
+        p: [
+          'Ai sensi del GDPR puoi richiedere accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei tuoi dati personali. Per esercitare questi diritti scrivi a ' +
+            CONTACTS.email +
+            '. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).',
+        ],
+      },
+      {
+        h: 'Modifiche',
+        p: [
+          'Questa informativa può essere aggiornata nel tempo. La data di "ultimo aggiornamento" qui sopra indica la versione più recente.',
+        ],
+      },
+    ],
+    back: '← Torna alla home',
+  },
+};
+
+const c = content[lang];
+const homeHref = lang === 'en' ? '/' : '/it';
+---
+
+<section class="py-24">
+  <div class="container-page max-w-3xl">
+    <a href={homeHref} class="font-mono text-sm text-accent transition-colors hover:text-accent-hover">
+      {c.back}
+    </a>
+
+    <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{c.title}</h1>
+    <p class="mt-3 font-mono text-sm text-fg-soft">{c.updated}</p>
+    <p class="mt-6 text-base leading-relaxed text-fg-soft">{c.intro}</p>
+
+    <div class="mt-10 space-y-10">
+      {
+        c.sections.map((s) => (
+          <div>
+            <h2 class="text-xl font-bold sm:text-2xl">{s.h}</h2>
+            <div class="mt-3 space-y-3 text-base leading-relaxed text-fg-soft">
+              {s.p.map((para) => (
+                <p>{para}</p>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

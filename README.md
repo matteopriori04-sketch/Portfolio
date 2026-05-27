@@ -2,7 +2,10 @@
 
 Personal portfolio site. Static, fast, bilingual (EN default at `/`, IT at `/it`),
 with dark/light mode. Built with **[Astro](https://astro.build)** and
-**[Tailwind CSS v4](https://tailwindcss.com)**, ready to deploy on **Vercel**.
+**[Tailwind CSS v4](https://tailwindcss.com)**, deployed on **Vercel**.
+
+**Live:** [matteopriori.vercel.app](https://matteopriori.vercel.app) ·
+**Repo:** [github.com/matteopriori04-sketch/Portfolio](https://github.com/matteopriori04-sketch/Portfolio)
 
 > The code is part of the portfolio — it aims to be clean, commented and easy to read.
 
@@ -86,7 +89,7 @@ Italian version is at `http://localhost:4321/it`.
    git add .
    git commit -m "Initial portfolio"
    git branch -M main
-   git remote add origin https://github.com/matteopriori04-sketch/<your-repo>.git
+   git remote add origin https://github.com/matteopriori04-sketch/Portfolio.git
    git push -u origin main
    ```
 2. Go to **[vercel.com](https://vercel.com)** and sign in **with GitHub**.
@@ -97,10 +100,11 @@ Italian version is at `http://localhost:4321/it`.
    - **Build Command:** `astro build`
    - **Output Directory:** `dist`
    - **Install Command:** `npm install`
-5. Click **Deploy**. After ~1 minute you’ll get a live URL like
-   `https://<your-repo>.vercel.app`.
-6. **Update the canonical URL** to that domain in `astro.config.mjs` (`site:`),
-   `src/consts.ts` (`SITE.url`) and `public/robots.txt`, then commit & push.
+5. Click **Deploy**. After ~1 minute you’ll get a live URL — this project is
+   served at `https://matteopriori.vercel.app`.
+6. **Keep the canonical URL in sync** with that domain in `astro.config.mjs`
+   (`site:`), `src/consts.ts` (`SITE.url`) and `public/robots.txt` — they are
+   already set to `https://matteopriori.vercel.app`.
 
 From now on **every push to `main` redeploys automatically**, and pull requests
 get their own preview URLs.

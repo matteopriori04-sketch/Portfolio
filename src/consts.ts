@@ -6,7 +6,7 @@
 
 export const SITE = {
   /** Canonical production URL. Keep in sync with `site` in astro.config.mjs. */
-  url: 'https://matteo-priori.vercel.app',
+  url: 'https://matteopriori.vercel.app',
   /** Author / owner. */
   author: 'Matteo Priori',
   /** Path (relative to /public) of the social-sharing image. */

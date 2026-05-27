@@ -130,6 +130,18 @@ const base = Astro.site ?? SITE.url;
     <Footer lang={lang} />
 
     <script>
+      // Reconstitute spam-obfuscated email links (see Email.astro): decode the
+      // base64 address, wire up the real mailto: href and reveal it as text.
+      document.querySelectorAll<HTMLAnchorElement>('a[data-email]').forEach((a) => {
+        const email = atob(a.dataset.email ?? '');
+        a.setAttribute('href', `mailto:${email}`);
+        a.removeAttribute('data-email');
+        const text = a.querySelector('.js-email');
+        if (text) text.textContent = email;
+      });
+    </script>
+
+    <script>
       // Progressive-enhancement scroll reveal: hide [data-reveal] elements,
       // then fade them up as they enter the viewport. Optional stagger via
       // `data-reveal-delay` (ms).

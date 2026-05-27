@@ -11,7 +11,8 @@
  * REVIEW before publishing: confirm the data-controller details and, if you
  * later add forms or analytics, update the relevant sections.
  */
-import { CONTACTS, SITE } from '../consts';
+import { SITE } from '../consts';
+import Email from './Email.astro';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -31,7 +32,7 @@ const content = {
       {
         h: 'Data Controller',
         p: [
-          `The data controller is ${SITE.author} (Rome, Italy). For any privacy request you can write to ${CONTACTS.email}.`,
+          `The data controller is ${SITE.author} (Rome, Italy). For any privacy request you can write to {EMAIL}.`,
         ],
       },
       {
@@ -63,9 +64,7 @@ const content = {
       {
         h: 'Your rights',
         p: [
-          'Under the GDPR you may request access, rectification, erasure, restriction, objection and portability of your personal data. To exercise these rights, write to ' +
-            CONTACTS.email +
-            '. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali, garanteprivacy.it).',
+          'Under the GDPR you may request access, rectification, erasure, restriction, objection and portability of your personal data. To exercise these rights, write to {EMAIL}. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali, garanteprivacy.it).',
         ],
       },
       {
@@ -85,7 +84,7 @@ const content = {
       {
         h: 'Titolare del trattamento',
         p: [
-          `Il titolare del trattamento è ${SITE.author} (Roma, Italia). Per qualsiasi richiesta in materia di privacy puoi scrivere a ${CONTACTS.email}.`,
+          `Il titolare del trattamento è ${SITE.author} (Roma, Italia). Per qualsiasi richiesta in materia di privacy puoi scrivere a {EMAIL}.`,
         ],
       },
       {
@@ -117,9 +116,7 @@ const content = {
       {
         h: 'I tuoi diritti',
         p: [
-          'Ai sensi del GDPR puoi richiedere accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei tuoi dati personali. Per esercitare questi diritti scrivi a ' +
-            CONTACTS.email +
-            '. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).',
+          'Ai sensi del GDPR puoi richiedere accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei tuoi dati personali. Per esercitare questi diritti scrivi a {EMAIL}. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).',
         ],
       },
       {
@@ -154,7 +151,14 @@ const homeHref = lang === 'en' ? '/' : '/it';
             <h2 class="text-xl font-bold sm:text-2xl">{s.h}</h2>
             <div class="mt-3 space-y-3 text-base leading-relaxed text-fg-soft">
               {s.p.map((para) => (
-                <p>{para}</p>
+                <p>
+                  {para.split('{EMAIL}').map((part, i) => (
+                    <>
+                      {i > 0 && <Email class="text-accent transition-colors hover:text-accent-hover" />}
+                      {part}
+                    </>
+                  ))}
+                </p>
               ))}
             </div>
           </div>

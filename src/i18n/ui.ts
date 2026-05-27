@@ -36,7 +36,6 @@ export const ui = {
     'contact.cv': 'Download CV (PDF)',
 
     'footer.built': 'Built with Astro & Tailwind CSS.',
-    'footer.rights': 'All rights reserved.',
     'footer.privacy': 'Privacy Policy',
 
     'a11y.theme_toggle': 'Toggle light / dark theme',
@@ -66,7 +65,6 @@ export const ui = {
     'contact.cv': 'Scarica il CV (PDF)',
 
     'footer.built': 'Realizzato con Astro e Tailwind CSS.',
-    'footer.rights': 'Tutti i diritti riservati.',
     'footer.privacy': 'Informativa sulla privacy',
 
     'a11y.theme_toggle': 'Cambia tema chiaro / scuro',

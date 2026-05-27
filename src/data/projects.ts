@@ -12,8 +12,8 @@ type Localized = Record<Lang, string>;
 export interface Project {
   /** Stable id, used as the anchor / key. */
   id: string;
-  /** Project name (kept identical across languages). */
-  title: string;
+  /** Project name (localized — product names like "InfoStudio 54" stay as-is). */
+  title: Localized;
   /** Optional preview image, shown as the card header. */
   image?: ImageMetadata;
   /** One-line summary shown under the title. */
@@ -37,7 +37,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'minerva-web-parsing',
-    title: 'Web parsing & evaluation system for Minerva LLM',
+    title: {
+      en: 'Web parsing & evaluation system for Minerva LLM',
+      it: 'Sistema di web parsing e valutazione per l’LLM Minerva',
+    },
     tagline: {
       en: 'End-to-end pipeline to acquire and analyse web documents — Computer Engineering Lab (Prof. Navigli, Sapienza).',
       it: 'Pipeline end-to-end per acquisire e analizzare documenti web — Laboratorio di Ingegneria Informatica (Prof. Navigli, Sapienza).',
@@ -59,7 +62,10 @@ export const projects: Project[] = [
   },
   {
     id: 'infostudio-54',
-    title: 'Nightclub website — InfoStudio 54',
+    title: {
+      en: 'Nightclub website — InfoStudio 54',
+      it: 'Sito web per discoteca — InfoStudio 54',
+    },
     image: discotecaImg,
     tagline: {
       en: 'Full-stack site with table booking and user accounts — Web Technologies & Systems (Sapienza), team of 3.',
@@ -78,7 +84,10 @@ export const projects: Project[] = [
   },
   {
     id: 'domain-chatbot',
-    title: 'Domain chatbot grounded in live web sources',
+    title: {
+      en: 'Domain chatbot grounded in live web sources',
+      it: 'Chatbot di dominio ancorato a fonti web reali',
+    },
     tagline: {
       en: 'Custom thesis with Prof. Navigli — a chatbot that answers from real, parsed web pages.',
       it: 'Tesi personalizzata col Prof. Navigli — un chatbot che risponde a partire da pagine web reali e analizzate.',

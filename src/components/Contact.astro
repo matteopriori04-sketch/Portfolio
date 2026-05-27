@@ -5,6 +5,7 @@
 import { useTranslations } from '../i18n/utils';
 import { sections } from '../i18n/content';
 import { SITE, CONTACTS } from '../consts';
+import Email from './Email.astro';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -30,9 +31,8 @@ const s = sections[lang];
     </p>
 
     <div class="mt-10 flex flex-wrap gap-4" data-reveal data-reveal-delay="240">
-      <!-- Email (primary CTA) -->
-      <a
-        href={`mailto:${CONTACTS.email}`}
+      <!-- Email (primary CTA) — address obfuscated, see Email.astro -->
+      <Email
         class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-contrast transition-colors hover:bg-accent-hover"
       >
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -40,7 +40,7 @@ const s = sections[lang];
           <path d="m22 7-10 6L2 7"></path>
         </svg>
         {t('contact.email')}
-      </a>
+      </Email>
 
       <!-- GitHub -->
       <a
@@ -85,7 +85,7 @@ const s = sections[lang];
 
     <!-- Plain-text fallbacks (also good for crawlers) -->
     <p class="mt-8 font-mono text-sm text-fg-soft" data-reveal>
-      <a href={`mailto:${CONTACTS.email}`} class="hover:text-accent">{CONTACTS.email}</a>
+      <Email class="hover:text-accent" />
       <span class="mx-2 text-border">/</span>
       <a href={CONTACTS.githubUrl} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
         @{CONTACTS.github}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://matteo-priori.vercel.app/sitemap-index.xml
+Sitemap: https://matteopriori.vercel.app/sitemap-index.xml

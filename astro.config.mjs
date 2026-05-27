@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   // Used to generate absolute URLs (sitemap, canonical, Open Graph).
   // Update this to your final domain once deployed (see README).
-  site: 'https://matteo-priori.vercel.app',
+  site: 'https://matteopriori.vercel.app',
 
   // Bilingual site: English is the default and lives at the site root (`/`),
   // Italian is served under the `/it` prefix. Both are fully pre-rendered.

@@ -1,0 +1,33 @@
+---
+/**
+ * Email — spam-resistant mailto link.
+ *
+ * The real address never ships in the static HTML: we emit a base64-encoded
+ * value in `data-email` and an `href="#"` placeholder. The hydration script in
+ * BaseLayout decodes it on load, sets the real `mailto:` href, and (when no
+ * label slot is given) fills in the visible address. Harvesters scanning for
+ * `mailto:` or `name@domain` patterns find neither.
+ *
+ * With JavaScript disabled the link stays inert but a human-readable,
+ * scraper-unfriendly form (`name [at] domain [dot] tld`) is shown as fallback.
+ */
+import { CONTACTS } from '../consts';
+
+interface Props {
+  /** Extra classes for the anchor. */
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+// A label slot turns this into a styled button (icon + text); without one the
+// component renders the address itself.
+const hasLabel = Astro.slots.has('default');
+
+// Encoded at build time so the literal address is absent from the markup.
+const encoded = Buffer.from(CONTACTS.email).toString('base64');
+const fallback = CONTACTS.email.replace('@', ' [at] ').replace(/\./g, ' [dot] ');
+---
+
+<a class={className} data-email={encoded} href="#">
+  {hasLabel ? <slot /> : <span class="js-email">{fallback}</span>}
+</a>

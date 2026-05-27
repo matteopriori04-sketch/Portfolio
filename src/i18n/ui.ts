@@ -32,6 +32,7 @@ export const ui = {
 
     'contact.email': 'Email me',
     'contact.github': 'GitHub',
+    'contact.linkedin': 'LinkedIn',
     'contact.cv': 'Download CV (PDF)',
 
     'footer.built': 'Built with Astro & Tailwind CSS.',
@@ -61,6 +62,7 @@ export const ui = {
 
     'contact.email': 'Scrivimi una mail',
     'contact.github': 'GitHub',
+    'contact.linkedin': 'LinkedIn',
     'contact.cv': 'Scarica il CV (PDF)',
 
     'footer.built': 'Realizzato con Astro e Tailwind CSS.',

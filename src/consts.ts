@@ -19,4 +19,5 @@ export const CONTACTS = {
   email: 'matteo.priori04@gmail.com',
   github: 'matteopriori04-sketch',
   githubUrl: 'https://github.com/matteopriori04-sketch',
+  linkedinUrl: 'https://www.linkedin.com/in/matteo-priori-4301553aa/',
 } as const;

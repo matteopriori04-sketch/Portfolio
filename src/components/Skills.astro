@@ -31,6 +31,7 @@ const s = sections[lang];
             <h3 class="font-mono text-sm uppercase tracking-wider text-accent">
               {group.category[lang]}
             </h3>
+            <p class="mt-1 text-xs text-neutral-500">{group.context[lang]}</p>
             <ul class="mt-4 flex flex-wrap gap-2">
               {group.items.map((item) => (
                 <li class="rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-sm text-fg">

@@ -4,6 +4,7 @@
  * optional result callout, stack badges and links (GitHub / demo).
  * "In progress" projects get a status badge instead of a GitHub link.
  */
+import { Image } from 'astro:assets';
 import { useTranslations } from '../i18n/utils';
 import type { Project } from '../data/projects';
 import type { Lang } from '../i18n/ui';
@@ -24,6 +25,21 @@ const t = useTranslations(lang);
   data-reveal
   data-reveal-delay={delay}
 >
+  <!-- Preview image (optional): acts as the card header -->
+  {
+    project.image && (
+      <div class="mb-6 overflow-hidden rounded-xl border border-border">
+        <Image
+          src={project.image}
+          alt={`${project.title} — preview`}
+          widths={[400, 800]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          class="aspect-video w-full object-cover transition duration-300 group-hover:scale-105 group-hover:brightness-105"
+        />
+      </div>
+    )
+  }
+
   <!-- Header: title + status -->
   <div class="flex items-start justify-between gap-4">
     <h3 class="text-xl font-bold sm:text-2xl">{project.title}</h3>

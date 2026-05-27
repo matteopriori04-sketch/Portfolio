@@ -3,7 +3,9 @@
  * Bilingual fields use `{ en, it }`; technical labels (stack) stay language-neutral.
  */
 
+import type { ImageMetadata } from 'astro';
 import type { Lang } from '../i18n/ui';
+import discotecaImg from '../assets/images/progetto-discoteca.jpg';
 
 type Localized = Record<Lang, string>;
 
@@ -12,6 +14,8 @@ export interface Project {
   id: string;
   /** Project name (kept identical across languages). */
   title: string;
+  /** Optional preview image, shown as the card header. */
+  image?: ImageMetadata;
   /** One-line summary shown under the title. */
   tagline: Localized;
   /** What it does and why it matters. */
@@ -56,6 +60,7 @@ export const projects: Project[] = [
   {
     id: 'infostudio-54',
     title: 'Nightclub website — InfoStudio 54',
+    image: discotecaImg,
     tagline: {
       en: 'Full-stack site with table booking and user accounts — Web Technologies & Systems (Sapienza), team of 3.',
       it: 'Sito full-stack con prenotazione tavoli e account utente — Tecnologie e Sistemi Web (Sapienza), team da 3.',

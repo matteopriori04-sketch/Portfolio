@@ -52,18 +52,16 @@ export const about: Localized<{
     eyebrow: 'About',
     title: 'Engineer in the making, problem solver by default',
     paragraphs: [
-      'I’m in my third year of Computer Engineering at Sapienza University of Rome. The coursework gave me solid foundations across software, systems and data — but what I enjoy most is taking a vague problem and turning it into something that actually runs.',
-      'I’m now choosing between two master’s tracks: Cybersecurity and Artificial Intelligence. Both pull me in, and the work I do today — from web-parsing pipelines to LLM evaluation — sits right at their intersection.',
-      'I like clean, well-documented code, reproducible setups (Docker, Linux, Git) and measuring whether something works instead of assuming it does. This very site is part of that mindset: simple, fast, and readable end to end.',
+      'I’m a third-year Computer Engineering student at Sapienza University of Rome. The coursework gave me solid foundations across software, systems and data, and I enjoy the parts where a vague problem turns into something that actually runs.',
+      'I’m drawn to cybersecurity and applied AI, and the work I like best sits there: building systems and pipelines, then measuring whether they actually work — from web parsing to LLM evaluation. I value clean, documented code and reproducible setups over guesswork.',
     ],
   },
   it: {
     eyebrow: 'Chi sono',
     title: 'Ingegnere in formazione, problem solver per natura',
     paragraphs: [
-      'Sono al terzo anno di Ingegneria Informatica alla Sapienza di Roma. Il percorso mi ha dato basi solide tra software, sistemi e dati — ma ciò che mi appassiona di più è prendere un problema poco definito e trasformarlo in qualcosa che funziona davvero.',
-      'Sto scegliendo tra due percorsi magistrali: Cybersecurity e Artificial Intelligence. Mi attraggono entrambi, e il lavoro che faccio oggi — da pipeline di parsing web alla valutazione di LLM — si colloca proprio alla loro intersezione.',
-      'Amo il codice pulito e ben documentato, gli ambienti riproducibili (Docker, Linux, Git) e misurare se qualcosa funziona invece di darlo per scontato. Questo sito stesso fa parte di questa mentalità: semplice, veloce e leggibile dall’inizio alla fine.',
+      'Sono uno studente del terzo anno di Ingegneria Informatica alla Sapienza di Roma. Il percorso mi ha dato basi solide tra software, sistemi e dati, e ciò che mi appassiona è la parte in cui un problema poco definito diventa qualcosa che funziona davvero.',
+      'Mi interessano cybersecurity e intelligenza artificiale applicata, e il lavoro che preferisco si colloca proprio lì: costruire sistemi e pipeline e poi misurare se funzionano davvero — dal parsing web alla valutazione di LLM. Preferisco codice pulito e documentato e ambienti riproducibili al tirare a indovinare.',
     ],
   },
 };
@@ -88,7 +86,7 @@ export const sections: Localized<{
     contactEyebrow: 'Contact',
     contactTitle: 'Let’s talk',
     contactIntro:
-      'I’m currently studying Computer Engineering and plan to continue with a master’s in AI or Cybersecurity (still deciding which). I’m open to job offers — the best way to reach me is by email.',
+      'I’m currently finishing my B.Sc. in Computer Engineering at Sapienza and plan to continue with a master’s in AI or Cybersecurity. I’m open to internships, collaborations, and interesting conversations — email is the best way to reach me.',
   },
   it: {
     projectsEyebrow: 'Progetti',
@@ -100,6 +98,6 @@ export const sections: Localized<{
     contactEyebrow: 'Contatti',
     contactTitle: 'Parliamone',
     contactIntro:
-      'Attualmente studio Ingegneria Informatica e proseguirò con una magistrale in AI o Cybersecurity (devo ancora decidere quale). Sono aperto a offerte di lavoro — il modo migliore per contattarmi è via mail.',
+      'Sto concludendo la laurea triennale in Ingegneria Informatica alla Sapienza e proseguirò con una magistrale in AI o Cybersecurity. Sono aperto a tirocini, collaborazioni e conversazioni interessanti — il modo migliore per contattarmi è via mail.',
   },
 };
